@@ -1,0 +1,17 @@
+- hosts: 172.31.46.11
+  become: yes
+  tasks:
+    - name: install apche
+      yum:
+        name: httpd
+        state: present
+    - name: copy code to remote machine
+      copy:
+        src: index.html
+        dest: /var/www/html/
+    - name: start apache
+      service:
+        name: httpd
+        enable: yes
+        state: started
+
